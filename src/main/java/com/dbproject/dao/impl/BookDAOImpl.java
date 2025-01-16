@@ -8,7 +8,7 @@ public class BookDAOImpl implements BookDAO {
 
     private final JdbcTemplate jdbcTemplate;
 
-    public BookDAOImpl(JdbcTemplate jdbcTemplate){
+    public BookDAOImpl(final JdbcTemplate jdbcTemplate){
         this.jdbcTemplate = jdbcTemplate;
     }
     
