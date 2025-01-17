@@ -1,5 +1,7 @@
 package com.dbproject.dao.impl;
 
+import java.util.Optional;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.dbproject.dao.AuthorDAO;
@@ -19,6 +21,12 @@ public class AuthorDAOImpl implements AuthorDAO {
         jdbcTemplate.update("INSERT INTO authors (id, name, age) VALUES(?, ?, ?)", 
         author.getId(),author.getName(), author.getAge()
         );
+    }
+
+    // it will rather returns a one Author or Empty as Optional rather than null which is type safe
+    public Optional<Author> findOne(long l) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findOne'");
     }
 
 }

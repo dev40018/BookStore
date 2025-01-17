@@ -16,6 +16,10 @@ public class BookDAOImpl implements BookDAO {
     public void create(Book book) {
         jdbcTemplate.update("INSERT INTO Books (isbn, title, author_id) VALUES(?, ?, ?)", book.getIsbn(), book.getTitle(), book.getAuthorId());
     }
+    public void findOne(long l) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findOne'");
+    }
     
 
     

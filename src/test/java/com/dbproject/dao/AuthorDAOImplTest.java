@@ -59,6 +59,15 @@ public class AuthorDAOImplTest {
          */
 
     }
+    @Test
+    public void testThatFindOneAuthorGeneratesCorrectSQL(){
+        underTest.findOne(1L);
+        
+        verify(jdbcTemplate).query(eq("SELECT * FROM authors WHERE id=? LIMIT 1"), eq(1L));
+        //NOTE: because we are using JDBC/DAO pattern we need to handle java Object <-> SQL conversion with ourselves and one of those features that enables us to do that is rowMapper
+
+    }
+
     
 }
 /**
