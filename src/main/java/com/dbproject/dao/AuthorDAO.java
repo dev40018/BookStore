@@ -1,6 +1,7 @@
 package com.dbproject.dao;
 
-public interface AuthorDAO {
+import com.dbproject.domain.Author;
 
-    
+public interface AuthorDAO {
+    public void create(Author author);
 } 
