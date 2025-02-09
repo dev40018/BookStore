@@ -20,6 +20,7 @@ public class BookDAOImpl implements BookDAO {
     public BookDAOImpl( JdbcTemplate jdbcTemplate){
         this.jdbcTemplate = jdbcTemplate;
     }
+
     @Override
     public void create(Book book) {
         jdbcTemplate.update(
@@ -34,6 +35,11 @@ public class BookDAOImpl implements BookDAO {
                 "SELECT * FROM books WHERE isbn = ? LIMIT 1",
                 new BookDaoMapper(), isbn);
         return results.stream().findFirst();
+    }
+
+    @Override
+    public List<Book> findMany() {
+        return jdbcTemplate.query("SELECT * FROM books", new BookDaoMapper());
     }
 
     public static class BookDaoMapper implements RowMapper<Book>{

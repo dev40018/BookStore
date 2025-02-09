@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.extern.java.Log;
 import org.springframework.jdbc.core.RowMapper;
 
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,6 +16,7 @@ import com.dbproject.domain.Author;
 import org.springframework.stereotype.Component;
 
 @Component
+@Log
 public class AuthorDAOImpl implements AuthorDAO {
     
      
@@ -35,6 +37,19 @@ public class AuthorDAOImpl implements AuthorDAO {
     public Optional<Author> findOne(long authorId) {
         List<Author> results = jdbcTemplate.query("SELECT * FROM authors WHERE id=? LIMIT 1",new AuthorDAOMapper(), authorId);
         return results.stream().findFirst();
+    }
+
+    @Override
+    public List<Author> findMany() {
+        List<Author> authors = jdbcTemplate.query("SELECT * FROM authors", new AuthorDAOMapper());
+        return authors;
+    }
+
+    @Override
+    public void update(Author author, Long id) {
+        jdbcTemplate.update("UPDATE authors SET id = ?, name = ?, age = ? WHERE id = ?",
+                author.getId(),author.getName(), author.getAge(), id
+        );
     }
 
     public static class AuthorDAOMapper implements RowMapper<Author>{
