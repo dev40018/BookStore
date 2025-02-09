@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS "authors";
 
 CREATE TABLE "authors"(
 
-    "id" BIGINT SERIAL  NOT NULL,
+    "id" BIGINT NOT NULL,
     "name" TEXT,
     "age" INTEGER,
     CONSTRAINT "authors_pkey" PRIMARY KEY ("id")
@@ -18,4 +18,4 @@ CREATE TABLE "books"(
     CONSTRAINT "fk_author" FOREIGN KEY(author_id) REFERENCES authors(id)
 );
 
-CREATE INDEX "isbnIndex" ON "books(isbn)";
+--CREATE INDEX "isbnIndex" ON "books(isbn)";

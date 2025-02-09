@@ -12,7 +12,9 @@ import org.springframework.lang.Nullable;
 
 import com.dbproject.dao.AuthorDAO;
 import com.dbproject.domain.Author;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AuthorDAOImpl implements AuthorDAO {
     
      
