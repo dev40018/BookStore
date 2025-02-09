@@ -5,6 +5,7 @@ import static org.mockito.Mockito.verify;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -37,6 +38,13 @@ public class BookDAOImplTest {
         verify(jdbcTemplate).update(eq("INSERT INTO Books (isbn, title, author_id) VALUES(?, ?, ?)"),
          eq("SO432DFS"), eq("SomeOne"), eq(1L)
          );
+    }
+
+    @Test
+    public void checkThatFindOneGeneratesCorrectSQL(){
+        underTest.findOne("SO432DFS");
+        verify(jdbcTemplate).query(eq("SELECT * FROM books WHERE isbn = ? LIMIT 1"),
+        ArgumentMatchers.<BookDAOImpl.BookDaoMapper>any(),eq("SO432DFS"));
     }
 
     
