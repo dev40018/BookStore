@@ -42,6 +42,12 @@ public class BookDAOImpl implements BookDAO {
         return jdbcTemplate.query("SELECT * FROM books", new BookDaoMapper());
     }
 
+    @Override
+    public void update(Book book, String isbn) {
+        jdbcTemplate.update("UPDATE books SET isbn = ?, title = ?, author_id = ? WHERE isbn = ?",
+                book.getIsbn(), book.getTitle(), book.getAuthorId(), isbn);
+    }
+
     public static class BookDaoMapper implements RowMapper<Book>{
 
         @Override

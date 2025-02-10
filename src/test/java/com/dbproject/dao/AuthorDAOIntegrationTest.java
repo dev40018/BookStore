@@ -47,4 +47,15 @@ public class AuthorDAOIntegrationTest {
 
         assertThat(authors).hasSize(3).containsExactly(author, author1, author2);
     }
+    @Test
+    void testUpdateAuthorsInDatabaseAndFindOneWorks(){
+        Author author = TestDataUtil.createTestAuthor();
+        underTest.create(author);
+        author.setName("UPDATE");
+        underTest.update(author, author.getId());
+        Optional<Author> author1 = underTest.findOne(author.getId());
+
+        assertThat(author1).isPresent(); // checks if author1 has found from db
+        assertThat(author1.get()).isEqualTo(author);
+    }
 }

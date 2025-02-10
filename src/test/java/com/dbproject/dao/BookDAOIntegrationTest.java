@@ -71,6 +71,25 @@ public class BookDAOIntegrationTest {
 
 
     }
+    @Test
+    void testUpdatesBooksInDatabaseAndFindManyWorks(){
+        Author author = TestDataUtil.createTestAuthor();
+        authorDAO.create(author);
+
+        Book book = TestDataUtil.createTestBook();
+        book.setAuthorId(author.getId());
+        underTest.create(book);
+
+        book.setTitle("UPDATE");
+        underTest.update(book, book.getIsbn());
+
+        Optional<Book> book1 = underTest.findOne(book.getIsbn());
+
+        assertThat(book1).isPresent();
+        assertThat(book1.get()).isEqualTo(book);
+
+
+    }
 }
 /**
  *

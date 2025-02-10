@@ -9,4 +9,6 @@ public interface BookDAO {
     public void create(Book book);
     Optional<Book> findOne(String isbn);
     List<Book> findMany();
+
+    void update(Book book, String isbn);
 }

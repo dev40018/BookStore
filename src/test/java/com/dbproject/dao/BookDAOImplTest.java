@@ -4,6 +4,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 
 
+import com.dbproject.domain.Author;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
@@ -48,6 +49,14 @@ public class BookDAOImplTest {
     public void testFindManyMethodGeneratesCorrectSQL(){
         underTest.findMany();
         verify(jdbcTemplate).query(eq("SELECT * FROM books"), ArgumentMatchers.<BookDAOImpl.BookDaoMapper>any());
+    }
+
+    @Test
+    public void testUpdateMethodGeneratesCorrectSQL(){
+        Book book = TestDataUtil.createTestBook1();
+        underTest.update(book, "SO432DFS");
+        verify(jdbcTemplate).update("UPDATE books SET isbn = ?, title = ?, author_id = ? WHERE isbn = ?"
+                , "SO432DFS", "SomeOne", 2L, "SO432DFS" );
     }
 
 
